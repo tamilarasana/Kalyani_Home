@@ -8,7 +8,7 @@
 <div class="block-header">
       <div class="row">
           <div class="col-lg-7 col-md-6 col-sm-12">
-              <h2>Highlight
+              <h2>Highlight</h2>
                   <small class="text-muted">Welcome to Kalyani Home Application</small>
               </h2>
           </div>
@@ -30,7 +30,7 @@
                               <i class="fa fa-plus"></i>
                               
                           </a>
-                      <h2>Highlight/h2>
+                      <h2>Highlight</h2>
                   </div>
                   <div class="body">
                       <div class="table-responsive">

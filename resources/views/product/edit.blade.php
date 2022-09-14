@@ -179,11 +179,32 @@
                                     </span>
                                 @endif
                             </div>
-                            <br>
-                            <div class="card-action">
-                                <button class="btn btn-success">Submit</button>
-                                <a href="{{ url('/Product') }}" class="btn btn-danger">Cancel</a>
-                            </div>
+
+                            <label for="image">Image</label>
+                            <div class="form-group">
+                                <div class="fallback">
+                                    <input type="file" id="image" class="form-control" name="images[]" multiple
+                                         />
+                                        @foreach ( $product->images as $image)
+                                        <div class="pull-left">
+                                           <img  src="{{ asset('storage/'.$image->images) }}"width ="50px" height="50px" alt="Image">&nbsp;
+                                           <p class="text-center mt-1"> <a href="javascript:void(0);" class=" btn btn-danger btn-sm  delete" data-id="{{ $image->id }}"><i class="fa fa-trash" aria-hidden="true"></i></a></p>
+
+                                        </div>
+                                        @endforeach
+                                </div>
+                                @if ($errors->has('image'))
+                                    <span class="text-danger">
+                                        <li>Oops! {{ $errors->first('image') }}</li>
+                                    </span>
+                                @endif
+                            </div>                                
+                           
+                        </div>
+                        <br><br><br>
+                        <div class="card-action"> 
+                            <button class="btn btn-success ml-2">Submit</button>
+                            <a href="{{ url('/Product') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -204,3 +225,25 @@
 
 
 @section('scripts')
+
+<script>
+    $(".delete").on("click", function(){
+        var id = $(this).attr("data-id");
+        var confirmation = confirm("Are you sure you want to delete this Image?");
+         if (confirmation) {
+        $.ajax({ 
+          url: "{{ route('destroy.image') }}",
+          data: {"id": id,"_token": "{{ csrf_token() }}"},
+          type: 'post',
+          success: function(result){
+              location.reload();
+          }
+        });
+    }
+    else{
+        return false;
+    }
+});
+  </script>
+      @endsection   
+ 

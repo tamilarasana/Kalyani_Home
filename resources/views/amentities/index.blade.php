@@ -57,8 +57,8 @@
                                 @foreach($amentities as $value)					
                                 <tr>
                                      <td>{{ $value->name }}</td>
-                                     <td>{{ $value->product->name }}</td>
-                                     <td>{{ $value->description }}</td>
+                                     <td>{{ $value->product->product_name }}</td>
+                                     <td>{{Str::limit($value->description, 10, $end='.....')}}</td>
                                         @if($value->status == "active")
                                             <td>Active</td>
                                           @else

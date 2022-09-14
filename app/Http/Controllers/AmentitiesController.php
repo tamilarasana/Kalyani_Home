@@ -80,7 +80,7 @@ class AmentitiesController extends Controller
      * @param  \App\Models\Amentities  $amentities
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Amentities $amentities)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required',
@@ -88,12 +88,16 @@ class AmentitiesController extends Controller
             'description' => 'required',
             'status' => 'required'
         ]);
-        $amentities->update($request->all());
-
+        
+            $amentities = Amentities::findOrfail($id);
+            $amentities->name = $request->name;
+            $amentities->product_id = $request->product_id;
+            $amentities->description = $request->description;
+            $amentities->status = $request->status;
+            $amentities->update();
         return redirect('amentities')->with('success', 'Amentities Updated Successfully.');
  
     }
-
     /**
      * Remove the specified resource from storage.
      *

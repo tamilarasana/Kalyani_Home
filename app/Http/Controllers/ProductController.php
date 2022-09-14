@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Location;
+use App\Models\Image;
 use App\Models\Producttype;
 use Illuminate\Http\Request;
+use DB;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -17,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('category','location','producttype')->get();
+        $product = Product::with('category','location','producttype','images')->get();
        return view('product.index',compact('product'));
     }
 
@@ -51,6 +54,7 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|alpha_num', 
             'contact_num' => 'required|numeric',  
+            // 'images' => 'required|image|mimes:jpeg,png,jpg',
             'remarks' => 'required',  
             'status' => 'required'
         ]);
@@ -67,7 +71,18 @@ class ProductController extends Controller
         // $product->remarks = $request ->remarks;
         // $product->status = $request ->status;
         // $product->save();
-        Product::create($request->all());
+       $product =  Product::create($request->all());
+            if($request->has('images')){
+                $files = $request->file('images');
+                foreach ($files as $key => $file)
+                {
+                    $imageName = $key.'-'.time().'.'.$file->extension(); 
+                    $path =  $file->storeAs('images',$imageName,'public');
+                    $data['product_id'] = $product->id;
+                    $data['images'] = $path;
+                    $car = Image::create($data);
+                }
+                }
         return redirect('product')->with('success', 'Product created Successfully.');
     }
 
@@ -104,7 +119,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'product_name' => 'required',
@@ -118,8 +133,35 @@ class ProductController extends Controller
             'remarks' => 'required',  
             'status' => 'required'
         ]);
-        
+        $product = Product::findOrFail($id);
+        $product -> product_name = $request->product_name;
+        $product -> category_id = $request->category_id;
+        $product->producttype_id = $request->producttype_id;
+        $product->about= $request->about;
+        $product->location_id= $request->location_id;
+        $product->description= $request->description;
+        $product->price = $request->price;
+        $product->contact_num = $request->contact_num;
+        $product->remarks = $request->remarks;
+        $product->status = $request->status;
+        $product ->update();
         $product->update($request->all());
+        if($request->has('images')){
+            $img_del = Image::where('product_id',$id)->get();
+            foreach($img_del as $img) {
+                Storage::delete('/public/'.$img->images);
+            }
+            Image::where('product_id',$id)->delete();
+            $files = $request->file('images');
+            foreach ($files as $key => $file){
+                $imageName = $key.'-'.time().'.'.$file->extension(); 
+                $path =  $file->storeAs('images',$imageName,'public');
+                DB::table('images')->where('id',$id)->insert([
+                    'product_id' => $product->id,
+                    'images' => $path,
+                ]);
+           }
+        }
         return redirect('product')->with('success', 'Product Updated Successfully.');
     }
     
@@ -130,8 +172,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::findOrFail($id);
+        $img_del = Image::where('product_id',$product->id)->get();
+        foreach($img_del as $img) {
+            Storage::delete('/public/'.$img->images);
+        }
+        Image::where('product_id',$product  ->id)->delete();
         $product->delete();
         return redirect('product')->with('success', 'Product Deleted Successfully.');
     }

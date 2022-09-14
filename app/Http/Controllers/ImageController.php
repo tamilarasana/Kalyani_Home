@@ -106,4 +106,14 @@ class ImageController extends Controller
     {
         //
     }
+
+    public function destroyImage(Request $request)
+    {
+        $id = $request->id;
+        $image = Image::find($id);
+        $image->delete();
+        Storage::delete('/public/'.$image->images);
+        return response()->json(['status'=>'200']);
+        // return redirect('product')->with('success', 'Product Deleted Successfully.');
+    }
 }

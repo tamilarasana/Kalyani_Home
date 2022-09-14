@@ -161,6 +161,21 @@
                                     </span>
                                 @endif
                             </div>
+
+
+                            <label for="image">Image</label>
+                            <div class="form-group">
+                                <div class="fallback">
+                                    <input type="file" id="image" class="form-control" name="images[]" multiple
+                                        required />
+                                </div>
+                                @if ($errors->has('images'))
+                                    <span class="text-danger">
+                                        <li>Oops! {{ $errors->first('images') }}</li>
+                                    </span>
+                                @endif
+                            </div>
+
                             <label for="status">Status</label>
                             <div class="form-group form-float">
                                 <div class="fallback">

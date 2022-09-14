@@ -40,7 +40,7 @@ class BannerController extends Controller
             'name' => 'required',
             'position' => 'required|numeric',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg',
             'status' => 'required'
         ]);
        

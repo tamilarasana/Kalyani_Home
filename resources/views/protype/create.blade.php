@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <h2>
-                    Banner
+                    Product Type
                     <small class="text-muted">Welcome to Kalyani Home Application</small>
                 </h2>
             </div>
@@ -18,7 +18,7 @@
                         <a href="index.html"><i class="fa fa-home"></i> Kalyani Home</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="javascript:void(0);">Banner</a>
+                        <a href="javascript:void(0);">Product Type</a>
                     </li>
                     {{-- <li class="breadcrumb-item active">Banner Form Elements</li> --}}
                 </ul>
@@ -71,7 +71,7 @@
                                     <select class="form-control show-tick" name="location_id" required>
                                         <option value="">Choose Our Category</option>
                                         @foreach ($location as $key => $data)
-                                            <option value="{{ $data->id }}">{{ $data->about_location }}</option>
+                                            <option value="{{ $data->id }}">{{ $data->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

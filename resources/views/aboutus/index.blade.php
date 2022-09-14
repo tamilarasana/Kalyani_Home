@@ -40,8 +40,8 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Position</th>
-                                    <th>Status</th>
                                     <th>Descripation</th>
+                                    <th>Status</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -50,8 +50,8 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Position</th>
-                                    <th>Status</th>
                                     <th>Descripation</th>
+                                    <th>Status</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -61,7 +61,7 @@
                                 <tr>
                                      <td>{{ $value->title }}</td>
                                      <td>{{ $value->position }}</td>
-                                     <td>{{ $value->description }}</td>
+                                     <td>{{Str::limit($value->description, 10, $end='.....')}}</td>
                                         @if($value->status == "active")
                                             <td>Active</td>
                                           @else

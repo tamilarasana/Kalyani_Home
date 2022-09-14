@@ -72,6 +72,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('property',PropertyController::class);
     Route::resource('season',SeasonController::class);
     Route::resource('specification',SpecificationController::class);
-    Route::resource('walkthroughvedio',WalkthroughvedioController::class);
+    Route::resource('walkthroughvedio',WalkthroughvedioController::class); 
+    Route::post('destroy-image',[ImageController::class,'destroyImage'])->name('destroy.image');
+   
+    // Route::get('/destroy/image/{image?}', [ImageController::class,'destroyImage'])->name('destroy.image');
+
 });
 
