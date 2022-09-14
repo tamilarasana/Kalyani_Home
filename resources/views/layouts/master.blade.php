@@ -261,30 +261,30 @@
                 <li class=" {{ Request::is('banner') ? 'active open' : ''}}"><a href="{{ route("banner.index") }}"><i class="fa fa-home"></i><span>Banner</span> </a></li>
                 <li  class=" {{ Request::is('category') ? 'active open' : ''}}"><a href="{{ route('category.index') }}"><i class="fa fa-list"></i><span>Category</span> </a></li>
                 <li class=" {{ Request::is('location') ? 'active open' : ''}}"><a href="{{ route('location.index') }}"><i class="fa fa-map-marker"></i><span>Location</span> </a></li>
-                <li class=" {{ Request::is('producttype') ? 'active open' : ''}}"><a href="{{ route('producttype.index') }}"><i class="fa fa-list-alt"></i><span>Property Type</span> </a></li>
+                <li class=" {{ Request::is('producttype') ? 'active open' : ''}}"><a href="{{ route('producttype.index') }}"><i class="fa fa-list-alt"></i><span>Product Type</span> </a></li>
                 <li class=" {{ Request::is('product') ? 'active open' : ''}}"><a href="{{ route('product.index') }}"><i class="fa fa-product-hunt"></i><span>Product</span></a></li>
                 <li class=" {{ Request::is('aboutus') ? 'active open' : ''}}"><a href="{{ route('aboutus.index') }}"><i class="fa fa-info"></i><span>Abouts</span> </a></li>
               
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i><span>Medias</span>
                 </a>
                 <ul class="ml-menu" >
-                    <li class=" {{ Request::is('images') ? 'active open' : ''}}"><a href="{{ route('images.index') }} "><i class="fa fa-picture-o" aria-hidden="true"></i><span>Images</span> </a></li>
-                    <li class=" {{ Request::is('interior') ? 'active open' : ''}}"><a href="{{ route('interior.index') }} "><i class="fa fa-file-image-o" ></i><span>Interior</span> </a></li>
+                    {{-- <li class=" {{ Request::is('images') ? 'active open' : ''}}"><a href="{{ route('images.index') }} "><i class="fa fa-picture-o" aria-hidden="true"></i><span>Images</span> </a></li> --}}
+                    <li class=" {{ Request::is('interior') ? 'active open' : ''}}" ><a href="{{ route('interior.index') }} "><i class="fa fa-file-image-o" ></i><span>Interior</span> </a></li>
+                    <li class=" {{ Request::is('fullview') ? 'active open' : ''}}"><a href="{{ route('fullview.index') }}"><i  class="fa fa-street-view" ></i><span>Full Views</span> </a></li>
+                    <li class=" {{ Request::is('exterior') ? 'active open' : ''}}"><a href="{{ route('exterior.index') }}"><i class="fa fa-external-link"></i><span>Exterior</span> </a></li>
+                    <li class=" {{ Request::is('walkthroughvedio') ? 'active open' : ''}}"><a href="{{ route('walkthroughvedio.index') }}"><i class="fa fa-google-wallet"></i><span>Walk Through Video</span> </a></li>
                 </ul>
-            </li>             
-                 <li class ="{{ Request::is('enquiry') ? 'active open' : ''}}"><a href="{{ route('enquiry.index') }} "><i class="fa fa-users"></i><span>Enquery</span> </a></li>
+            </li>  
+                 <li class=" {{ Request::is('highlight') ? 'active open' : ''}}"><a href="{{ route('highlight.index') }}"><i class="fa fa-street-view"></i><span>Highlight</span> </a></li>
+                 <li class ="{{ Request::is('enquiry') ? 'active open' : ''}}" ><a href="{{ route('enquiry.index') }} "><i class="fa fa-users"></i><span>Enquery</span> </a></li>
                  <li class=" {{ Request::is('masterplan') ? 'active open' : ''}}"><a href="{{ route('masterplan.index') }}" ><i class="fa fa-sitemap" ></i><span>Master Plan</span> </a></li>
                  <li class=" {{ Request::is('amentities') ? 'active open' : ''}}"><a href="{{ route('amentities.index') }}"><i class="fa fa-building"></i><span>Amentities</span> </a></li>
-                 <li class=" {{ Request::is('highlight') ? 'active open' : ''}}"><a href="{{ route('highlight.index') }}"><i class="fa fa-street-view"></i><span>Highlight</span> </a></li>
                  <li class=" {{ Request::is('season') ? 'active open' : ''}}"><a href="{{ route('season.index') }}"><i class="fa fa-sellsy"></i><span>Season</span> </a></li>
                  <li class=" {{ Request::is('specification') ? 'active open' : ''}}"><a href="{{ route('specification.index') }}"><i class="fa fa-star"></i><span>Specification</span> </a></li>
-                 <li class=" {{ Request::is('exterior') ? 'active open' : ''}}"><a href="{{ route('exterior.index') }}"><i class="fa fa-external-link"></i><span>Exterior</span> </a></li>
-                 <li class=" {{ Request::is('walkthroughvedio') ? 'active open' : ''}}"><a href="{{ route('walkthroughvedio.index') }}"><i class="fa fa-google-wallet"></i><span>Walk Through Video</span> </a></li>
                  <li class=" {{ Request::is('broucher') ? 'active open' : ''}}"><a href="{{ route('broucher.index') }}"><i class="fa fa-sticky-note"></i><span>Broucher </span> </a></li>
                  <li class=" {{ Request::is('faq') ? 'active open' : ''}}"><a href="{{ route('faq.index') }}"><i class="fa fa-circle-o-notch"></i><span>FAQ</span> </a></li>
                  <li class=" {{ Request::is('blog') ? 'active open' : ''}}"><a href="{{ route('blog.index') }}"><i  class="fa fa-square"></i><span>Blog</span> </a></li>
                  <li class=" {{ Request::is('maplocation') ? 'active open' : ''}}"><a href="{{ route('maplocation.index') }}"><i class="fa fa-globe" ></i><span>Map Location</span> </a></li>
-                 <li class=" {{ Request::is('fullview') ? 'active open' : ''}}"><a href="{{ route('fullview.index') }}"><i  class="fa fa-street-view" ></i><span>Full Views</span> </a></li>
             </ul>
         </div>
         </aside>
@@ -649,6 +649,12 @@
 
     @yield('scripts');
 </body>
+
+<style>
+    .sidebar .menu .list .ml-menu li.active a.toggled:not(.menu-toggle):before {
+    content: '' ;
+}
+</style>
 
 <!-- Mirrored from wrraptheme.com/templates/nexa/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Aug 2022 12:34:49 GMT -->
 
